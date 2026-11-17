@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Портфолио | Архитектор-проектировщик</title>
+    <link rel="preconnect" href="https://googleapis.com">
+    <link rel="preconnect" href="https://gstatic.com" crossorigin>
+    <link href="https://googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Manrope:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Текстура бумаги поверх всего экрана -->
+    <div class="paper-overlay"></div>
+
+    <main class="book-wrapper">
+        <!-- Страница 1: Титульный разворот / О себе -->
+        <section class="book-spread intro-spread" id="about">
+            <div class="book-spine"></div>
+            
+            <!-- Левая страница разворота: Фото и визитка -->
+            <div class="page page-left">
+                <div class="page-header">
+                    <span class="chapter-num">РАЗДЕЛ I</span>
+                    <span class="page-folio">ЛИСТ 01</span>
+                </div>
+                
+                <div class="portrait-frame">
+                    <!-- Замените avatar.jpg на путь к вашему фото -->
+                    <img src="avatar.jpg" alt="Фото архитектора" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=%22http://w3.org width=%22400%22 height=%22500%22><rect width=%22100%25%22 height=%22100%25%22 fill=%22%23EAE4D7%22/><text x=%2250%25%22 y=%2250%25%22 font-family=%22sans-serif%22 font-size=%2218%22 fill=%22%236E1E2A%22 text-anchor=%22middle%22>Место для фото (avatar.jpg)</text></svg>'">
+                    <div class="corner-mark top-left"></div>
+                    <div class="corner-mark bottom-right"></div>
+                </div>
+
+                <div class="author-stamp">
+                    <p class="stamp-role">АРХИТЕКТОР-ПРОЕКТИРОВЩИК / BIM</p>
+                    <h1 class="author-name">Лисенков Даниил</h1>
+                </div>
+            </div>
+
+            <!-- Правая страница разворота: Текст о себе и навыки -->
+            <div class="page page-right">
+                <div class="page-header">
+                    <span class="chapter-num">ПРЕАМБУЛА</span>
+                    <span class="page-folio">ЛИСТ 02</span>
+                </div>
+
+                <h2 class="section-title">Архитектура, конструкции и инженерные системы в единой модели</h2>
+                
+                <div class="bio-text">
+                    <p>Специализируюсь на комплексном проектировании зданий и координации инженерных сетей. В работе объединяю эстетику архитектурных решений с технической точностью конструктива и внутренних/наружных коммуникаций.</p>
+                    <p>Создаю информационные модели, по которым удобно строить без коллизий на площадке — от первых эскизов и планировок до рабочей документации и ведомостей объемов.</p>
+                </div>
+
+                <div class="skills-block">
+                    <h3>Ключевые компетенции</h3>
+                    <div class="skills-grid">
+                        <div class="skill-item">
+                            <span class="skill-tag">BIM & 3D</span>
+                            <p>Autodesk Revit, Navisworks, D5 Render, ArchiCAD</p>
+                        </div>
+                        <div class="skill-item">
+                            <span class="skill-tag">Разделы</span>
+                            <p>АР, КР, ОВиК, ВК, НВК (координация и увязка)</p>
+                        </div>
+                        <div class="skill-item">
+                            <span class="skill-tag">Документация</span>
+                            <p>РД по ГОСТ, исполнительная документация, сметы</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="scroll-hint">
+                    <a href="#portfolio" class="burgundy-link">Перейти к каталогу проектов ↓</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Страница 2: Каталог проектов -->
+        <section class="book-spread portfolio-spread" id="portfolio">
+            <div class="page full-page">
+                <div class="page-header">
+                    <span class="chapter-num">РАЗДЕЛ II — КАТАЛОГ ОБЪЕКТОВ</span>
+                    <span class="page-folio" id="project-counter">ЗАГРУЗКА...</span>
+                </div>
+
+                <h2 class="section-title">Избранные проекты</h2>
+                <p class="section-subtitle">Нажмите на любой том, чтобы открыть чертежи, визуализации и документацию</p>
+
+                <!-- Сюда JS автоматически подгрузит плашки из папок -->
+                <div class="projects-grid" id="projects-container"></div>
+            </div>
+        </section>
+
+        <!-- Подвал книги -->
+        <footer class="book-footer">
+            <div class="footer-content">
+                <div class="footer-contacts">
+                    <h3>Связь и сотрудничество</h3>
+                    <div class="contact-links">
+                        <a href="https://t.me" target="_blank">Telegram: @Architect_lis</a>
+                        <a href="mailto:Lisenkovdaniil1910@gmail.com">Lisenkovdaniil1910@gmail.com</a>
+                        <a href="tel:+79135121811">+7 (913) 512-18-11</a>
+                    </div>
+                </div>
+                <div class="footer-copy">
+                    <p>© 2026 Все права защищены.</p>
+                    <p class="brand-sign">Архитектурное и инженерное проектирование</p>
+                </div>
+            </div>
+        </footer>
+    </main>
+
+    <!-- Модальный просмотрщик проекта (листание как в книге) -->
+    <div class="viewer-modal" id="viewer-modal" aria-hidden="true">
+        <div class="viewer-backdrop" id="viewer-close-bg"></div>
+        <div class="viewer-book">
+            <header class="viewer-header">
+                <div class="viewer-title-group">
+                    <span class="viewer-badge" id="viewer-folder-id">ТОМ 01</span>
+                    <h3 id="viewer-title">Название проекта</h3>
+                </div>
+                <div class="viewer-controls">
+                    <span class="viewer-page-info" id="viewer-page-info">Лист 1 из 5</span>
+                    <button class="btn-icon" id="viewer-close" title="Закрыть (Esc)">✕ Закрыть</button>
+                </div>
+            </header>
+
+            <div class="viewer-stage">
+                <button class="nav-arrow prev" id="btn-prev" title="Предыдущий лист">‹</button>
+                
+                <div class="sheet-container" id="sheet-container">
+                    <!-- Сюда подставляется IMG или PDF -->
+                </div>
+
+                <button class="nav-arrow next" id="btn-next" title="Следующий лист">›</button>
+            </div>
+
+            <!-- Миниатюры всех файлов проекта внизу -->
+            <div class="viewer-thumbnails" id="viewer-thumbnails"></div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
