@@ -14,19 +14,18 @@
     <div class="paper-overlay"></div>
 
     <main class="book-wrapper">
-        <!-- Страница 1: Титульный разворот / О себе -->
+        <!-- Разворот 1: Представительская визитка и навыки -->
         <section class="book-spread intro-spread" id="about">
             <div class="book-spine"></div>
-            
-            <!-- Левая страница разворота: Фото и визитка -->
+
+            <!-- Левая страница: Фото и штамп -->
             <div class="page page-left">
                 <div class="page-header">
                     <span class="chapter-num">РАЗДЕЛ I</span>
                     <span class="page-folio">ЛИСТ 01</span>
                 </div>
-                
+
                 <div class="portrait-frame">
-                    <!-- Замените avatar.jpg на путь к вашему фото -->
                     <img src="avatar.jpg" alt="Фото архитектора" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=%22http://w3.org width=%22400%22 height=%22500%22><rect width=%22100%25%22 height=%22100%25%22 fill=%22%23EAE4D7%22/><text x=%2250%25%22 y=%2250%25%22 font-family=%22sans-serif%22 font-size=%2218%22 fill=%22%236E1E2A%22 text-anchor=%22middle%22>Место для фото (avatar.jpg)</text></svg>'">
                     <div class="corner-mark top-left"></div>
                     <div class="corner-mark bottom-right"></div>
@@ -38,7 +37,7 @@
                 </div>
             </div>
 
-            <!-- Правая страница разворота: Текст о себе и навыки -->
+            <!-- Правая страница: О себе и компетенции -->
             <div class="page page-right">
                 <div class="page-header">
                     <span class="chapter-num">ПРЕАМБУЛА</span>
@@ -46,7 +45,7 @@
                 </div>
 
                 <h2 class="section-title">Архитектура, конструкции и инженерные системы в единой модели</h2>
-                
+
                 <div class="bio-text">
                     <p>Специализируюсь на комплексном проектировании зданий и координации инженерных сетей. В работе объединяю эстетику архитектурных решений с технической точностью конструктива и внутренних/наружных коммуникаций.</p>
                     <p>Создаю информационные модели, по которым удобно строить без коллизий на площадке — от первых эскизов и планировок до рабочей документации и ведомостей объемов.</p>
@@ -75,8 +74,7 @@
                 </div>
             </div>
         </section>
-
-        <!-- Страница 2: Каталог проектов -->
+        <!-- Разворот 2: Автоматический каталог проектов -->
         <section class="book-spread portfolio-spread" id="portfolio">
             <div class="page full-page">
                 <div class="page-header">
@@ -85,9 +83,8 @@
                 </div>
 
                 <h2 class="section-title">Избранные проекты</h2>
-                <p class="section-subtitle">Нажмите на любой том, чтобы открыть чертежи, визуализации и документацию</p>
+                <p class="section-subtitle">Нажмите на любой том, чтобы открыть чертежи, 3D-модель и документацию</p>
 
-                <!-- Сюда JS автоматически подгрузит плашки из папок -->
                 <div class="projects-grid" id="projects-container"></div>
             </div>
         </section>
@@ -111,7 +108,7 @@
         </footer>
     </main>
 
-    <!-- Модальный просмотрщик проекта (листание как в книге) -->
+    <!-- Модальный книжный просмотрщик (PNG, PDF и 3D-модели) -->
     <div class="viewer-modal" id="viewer-modal" aria-hidden="true">
         <div class="viewer-backdrop" id="viewer-close-bg"></div>
         <div class="viewer-book">
@@ -121,6 +118,9 @@
                     <h3 id="viewer-title">Название проекта</h3>
                 </div>
                 <div class="viewer-controls">
+                    <button class="btn-3d-jump" id="btn-jump-3d" style="display: none;" title="Открыть 3D-модель объекта">
+                        🧊 Покрутить 3D
+                    </button>
                     <span class="viewer-page-info" id="viewer-page-info">Лист 1 из 5</span>
                     <button class="btn-icon" id="viewer-close" title="Закрыть (Esc)">✕ Закрыть</button>
                 </div>
@@ -128,19 +128,21 @@
 
             <div class="viewer-stage">
                 <button class="nav-arrow prev" id="btn-prev" title="Предыдущий лист">‹</button>
-                
-                <div class="sheet-container" id="sheet-container">
-                    <!-- Сюда подставляется IMG или PDF -->
-                </div>
-
+                <div class="sheet-container" id="sheet-container"></div>
                 <button class="nav-arrow next" id="btn-next" title="Следующий лист">›</button>
             </div>
 
-            <!-- Миниатюры всех файлов проекта внизу -->
             <div class="viewer-thumbnails" id="viewer-thumbnails"></div>
         </div>
     </div>
 
+    <!-- Уведомление о тихом фоновом обновлении сайта -->
+    <div class="live-toast" id="live-toast" aria-live="polite">
+        <span class="toast-dot"></span>
+        <span>Каталог проектов обновлен</span>
+    </div>
+
+    <script src="optimizer.js"></script>
     <script src="app.js"></script>
 </body>
 </html>
