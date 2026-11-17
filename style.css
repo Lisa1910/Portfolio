@@ -1,0 +1,609 @@
+:root {
+    --bg-desk: #E5DFD3;
+    --paper-base: #F9F6F0;
+    --paper-edge: #EFEAE0;
+    --ink-primary: #221F1D;
+    --ink-muted: #5C554E;
+    --burgundy: #6E1E2A;
+    --burgundy-light: #8C2736;
+    --border-line: #D6CEBF;
+    --font-serif: 'Cormorant Garamond', Georgia, serif;
+    --font-sans: 'Manrope', -apple-system, sans-serif;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    background-color: var(--bg-desk);
+    color: var(--ink-primary);
+    font-family: var(--font-sans);
+    line-height: 1.6;
+    padding: 40px 20px;
+    min-height: 100vh;
+}
+
+/* Текстура бумаги поверх экрана */
+.paper-overlay {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 9999;
+    opacity: 0.35;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://w3.org id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.18'/%3E%3C/svg%3E");
+}
+
+/* Обертка и развороты книги */
+.book-wrapper {
+    max-width: 1240px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 48px;
+}
+
+.book-spread {
+    background: var(--paper-base);
+    border: 1px solid var(--border-line);
+    box-shadow: 
+        0 20px 50px rgba(34, 31, 29, 0.12),
+        0 2px 6px rgba(34, 31, 29, 0.06),
+        inset 0 0 40px rgba(239, 234, 224, 0.6);
+    position: relative;
+}
+
+.intro-spread {
+    display: grid;
+    grid-template-columns: 1fr 1.25fr;
+}
+
+.book-spine {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 44.4%;
+    width: 40px;
+    transform: translateX(-50%);
+    background: linear-gradient(90deg, 
+        rgba(0,0,0,0) 0%, 
+        rgba(34,31,29,0.06) 45%, 
+        rgba(34,31,29,0.12) 50%, 
+        rgba(34,31,29,0.05) 55%, 
+        rgba(0,0,0,0) 100%);
+    pointer-events: none;
+    z-index: 2;
+}
+
+.page {
+    padding: 48px 56px;
+    position: relative;
+}
+
+.page-left {
+    border-right: 1px solid rgba(110, 30, 42, 0.15);
+}
+
+.page-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--burgundy);
+    border-bottom: 1px solid var(--border-line);
+    padding-bottom: 12px;
+    margin-bottom: 36px;
+    font-weight: 600;
+}
+
+/* Рамка под фото с чертежными уголками */
+.portrait-frame {
+    position: relative;
+    width: 100%;
+    max-width: 340px;
+    aspect-ratio: 4 / 5;
+    margin: 0 auto 28px;
+    padding: 10px;
+    border: 1px solid var(--border-line);
+    background: #FFFDF9;
+}
+
+.portrait-frame img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    filter: contrast(1.03);
+}
+
+.corner-mark {
+    position: absolute;
+    width: 14px;
+    height: 14px;
+    border-color: var(--burgundy);
+    border-style: solid;
+}
+
+.corner-mark.top-left {
+    top: -1px;
+    left: -1px;
+    border-width: 2px 0 0 2px;
+}
+
+.corner-mark.bottom-right {
+    bottom: -1px;
+    right: -1px;
+    border-width: 0 2px 2px 0;
+}
+/* Подпись автора и типографика */
+.author-stamp {
+    text-align: center;
+}
+
+.stamp-role {
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    color: var(--burgundy);
+    font-weight: 600;
+    margin-bottom: 6px;
+}
+
+.author-name {
+    font-family: var(--font-serif);
+    font-size: 36px;
+    font-weight: 600;
+    color: var(--ink-primary);
+    line-height: 1.1;
+}
+
+.section-title {
+    font-family: var(--font-serif);
+    font-size: 34px;
+    font-weight: 600;
+    line-height: 1.2;
+    color: var(--ink-primary);
+    margin-bottom: 20px;
+}
+
+.section-subtitle {
+    color: var(--ink-muted);
+    font-size: 15px;
+    margin-top: -12px;
+    margin-bottom: 32px;
+}
+
+.bio-text p {
+    font-size: 15px;
+    color: var(--ink-muted);
+    margin-bottom: 16px;
+}
+
+/* Блок компетенций */
+.skills-block {
+    margin-top: 32px;
+    padding-top: 24px;
+    border-top: 1px solid var(--border-line);
+}
+
+.skills-block h3 {
+    font-family: var(--font-serif);
+    font-size: 22px;
+    color: var(--burgundy);
+    margin-bottom: 16px;
+}
+
+.skills-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+}
+
+.skill-item {
+    border-left: 2px solid var(--burgundy);
+    padding-left: 12px;
+}
+
+.skill-tag {
+    display: block;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    font-weight: 600;
+    color: var(--burgundy);
+    margin-bottom: 4px;
+}
+
+.skill-item p {
+    font-size: 13px;
+    color: var(--ink-primary);
+    line-height: 1.4;
+}
+
+.scroll-hint {
+    margin-top: 36px;
+}
+
+.burgundy-link {
+    display: inline-block;
+    text-decoration: none;
+    color: var(--burgundy);
+    font-weight: 600;
+    font-size: 14px;
+    padding: 10px 20px;
+    border: 1px solid var(--burgundy);
+    transition: all 0.25s ease;
+}
+
+.burgundy-link:hover {
+    background: var(--burgundy);
+    color: #FFFDF9;
+}
+
+/* Сетка проектов (адаптивная под любое количество папок) */
+.projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(310px, 1fr));
+    gap: 28px;
+}
+
+.project-card {
+    background: #FFFDF9;
+    border: 1px solid var(--border-line);
+    cursor: pointer;
+    transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+    display: flex;
+    flex-direction: column;
+}
+
+.project-card:hover {
+    transform: translateY(-4px);
+    border-color: var(--burgundy);
+    box-shadow: 0 12px 24px rgba(110, 30, 42, 0.1);
+}
+
+.card-image-wrap {
+    position: relative;
+    aspect-ratio: 16 / 10;
+    overflow: hidden;
+    background: var(--paper-edge);
+    border-bottom: 1px solid var(--border-line);
+}
+
+.card-image-wrap img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.4s ease;
+}
+
+.project-card:hover .card-image-wrap img {
+    transform: scale(1.03);
+}
+
+.card-count-badge {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    background: var(--burgundy);
+    color: #FFFDF9;
+    font-size: 11px;
+    padding: 3px 8px;
+    letter-spacing: 0.06em;
+}
+
+.card-body {
+    padding: 20px;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.card-title {
+    font-family: var(--font-serif);
+    font-size: 24px;
+    font-weight: 600;
+    color: var(--ink-primary);
+    margin-bottom: 6px;
+}
+
+.card-desc {
+    font-size: 13px;
+    color: var(--ink-muted);
+    margin-bottom: 16px;
+}
+
+.card-action {
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--burgundy);
+    font-weight: 600;
+}
+
+/* Подвал книги */
+.book-footer {
+    background: var(--paper-base);
+    border: 1px solid var(--border-line);
+    padding: 36px 56px;
+}
+
+.footer-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    flex-wrap: wrap;
+    gap: 24px;
+}
+
+.footer-contacts h3 {
+    font-family: var(--font-serif);
+    font-size: 24px;
+    color: var(--burgundy);
+    margin-bottom: 12px;
+}
+
+.contact-links {
+    display: flex;
+    gap: 24px;
+    flex-wrap: wrap;
+}
+
+.contact-links a {
+    color: var(--ink-primary);
+    text-decoration: none;
+    font-size: 14px;
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.2s;
+}
+
+.contact-links a:hover {
+    color: var(--burgundy);
+    border-bottom-color: var(--burgundy);
+}
+
+.footer-copy {
+    text-align: right;
+    font-size: 13px;
+    color: var(--ink-muted);
+}
+/* Книжный просмотрщик (Модальное окно) */
+.viewer-modal {
+    position: fixed;
+    inset: 0;
+    z-index: 1000;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+.viewer-modal.active {
+    display: flex;
+}
+
+.viewer-backdrop {
+    position: absolute;
+    inset: 0;
+    background: rgba(28, 25, 23, 0.82);
+    backdrop-filter: blur(3px);
+}
+
+.viewer-book {
+    position: relative;
+    z-index: 2;
+    background: var(--paper-base);
+    width: 100%;
+    max-width: 1320px;
+    height: 92vh;
+    border: 1px solid var(--burgundy);
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 25px 60px rgba(0, 0, 0, 0.4);
+}
+
+.viewer-header {
+    padding: 16px 28px;
+    border-bottom: 1px solid var(--border-line);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #FFFDF9;
+}
+
+.viewer-title-group {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+
+.viewer-badge {
+    background: var(--burgundy);
+    color: #FFFDF9;
+    font-size: 11px;
+    padding: 4px 10px;
+    letter-spacing: 0.1em;
+}
+
+.viewer-title-group h3 {
+    font-family: var(--font-serif);
+    font-size: 24px;
+}
+
+.viewer-controls {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.viewer-page-info {
+    font-size: 13px;
+    color: var(--ink-muted);
+    font-weight: 500;
+}
+
+.btn-icon {
+    background: transparent;
+    border: 1px solid var(--burgundy);
+    color: var(--burgundy);
+    padding: 6px 14px;
+    cursor: pointer;
+    font-family: var(--font-sans);
+    font-size: 13px;
+    font-weight: 600;
+    transition: 0.2s;
+}
+
+.btn-icon:hover {
+    background: var(--burgundy);
+    color: #FFFDF9;
+}
+
+.viewer-stage {
+    flex-grow: 1;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    padding: 20px 64px;
+    background: var(--paper-edge);
+}
+
+.sheet-container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    animation: pageFlip 0.35s ease;
+}
+
+@keyframes pageFlip {
+    from {
+        opacity: 0.3;
+        transform: translateX(12px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+.sheet-container img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+    background: #FFF;
+}
+
+.sheet-container iframe {
+    width: 100%;
+    height: 100%;
+    border: 1px solid var(--border-line);
+    background: #FFF;
+}
+
+.nav-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 44px;
+    height: 44px;
+    background: var(--paper-base);
+    border: 1px solid var(--burgundy);
+    color: var(--burgundy);
+    font-size: 26px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: 0.2s;
+    z-index: 5;
+}
+
+.nav-arrow:hover {
+    background: var(--burgundy);
+    color: #FFFDF9;
+}
+
+.nav-arrow.prev {
+    left: 14px;
+}
+
+.nav-arrow.next {
+    right: 14px;
+}
+
+/* Лента миниатюр внизу просмотрщика */
+.viewer-thumbnails {
+    height: 84px;
+    border-top: 1px solid var(--border-line);
+    background: #FFFDF9;
+    padding: 10px 28px;
+    display: flex;
+    gap: 12px;
+    overflow-x: auto;
+    align-items: center;
+}
+
+.thumb-item {
+    height: 60px;
+    min-width: 84px;
+    border: 2px solid transparent;
+    cursor: pointer;
+    opacity: 0.65;
+    transition: 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--paper-edge);
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--burgundy);
+    padding: 2px;
+}
+
+.thumb-item.active,
+.thumb-item:hover {
+    opacity: 1;
+    border-color: var(--burgundy);
+}
+
+.thumb-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Адаптив под планшеты и телефоны */
+@media (max-width: 900px) {
+    .intro-spread {
+        grid-template-columns: 1fr;
+    }
+    .book-spine {
+        display: none;
+    }
+    .page {
+        padding: 32px 24px;
+    }
+    .page-left {
+        border-right: none;
+        border-bottom: 1px solid var(--border-line);
+    }
+    .skills-grid {
+        grid-template-columns: 1fr;
+    }
+    .viewer-stage {
+        padding: 12px 44px;
+    }
+}
