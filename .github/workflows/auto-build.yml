@@ -1,0 +1,37 @@
+name: Auto-build Portfolio Manifest
+
+on:
+  push:
+    branches:
+      - main
+      - master
+    paths:
+      - 'project/**'
+      - 'build.py'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build-manifest:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Run build.py
+        run: python build.py
+
+      - name: Commit and push updated manifest.json
+        run: |
+          git config --local user.email "github-actions[bot]@://github.com"
+          git config --local user.name "github-actions[bot]"
+          git add manifest.json
+          git diff --quiet && git diff --staged --quiet || (git commit -m "Auto-update manifest.json" && git push)
